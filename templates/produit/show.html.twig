@@ -1,14 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>{{produit.nom}}</h1>
-	<p>{{produit.description}}</p>
-	<p>{{produit.prix}}€</p>
-	<p>Stock :
-		{{produit.stock}}</p>
-	<p>photo :</p>
-	<img src="{{ asset('uploads/' ~ produit.photo)}}" alt="{{produit.nom}}">
+	<div class="card" style="width: 18rem;">
+		{% if produit.photo is not empty %}
+			<img src="{{ asset('uploads/' ~ produit.photo)}}" alt="{{produit.nom}}">
+		{% endif %}
+		<div class="card-body">
+			<h5 class="card-title">{{produit.nom}}</h5>
+			<p class="card-text">{{produit.description}}</p>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item">Prix :
+				{{produit.prix}}</li>
+			<li class="list-group-item">
+				Stock :
+				{{produit.stock}}
+			</li>
+			<a href="{{path('produit', {'id':produit.id})}}" class="btn btn-primary">Voir</a>
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="{{path('produit_delete', {'id':produit.id})}}" class="btn btn-danger">Supprimer</a>
+			{% endif %}
+		</ul>
+	</div>
 
-	<h2>Modifier
-		{{produit.nom}}</h2>
-	{{form(edit)}}{% endblock %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<h2>Modifier
+			{{produit.nom}}</h2>
+		{{form(edit)}}{% endif %}
+	{% endblock %}
