@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>{{produit.nom}}</h1>
+	<p>{{produit.description}}</p>
+	<p>{{produit.prix}}€</p>
+	<p>Stock :
+		{{produit.stock}}</p>
+	<p>photo :</p>
+	<img src="{{ asset('uploads/' ~ produit.photo)}}" alt="{{produit.nom}}">
+
+	<h2>Modifier
+		{{produit.nom}}</h2>
+	{{form(edit)}}{% endblock %}
