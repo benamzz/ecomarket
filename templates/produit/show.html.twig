@@ -16,6 +16,9 @@
 				Stock :
 				{{produit.stock}}
 			</li>
+			<li class="list-group-item">
+				<a href="{{path('panier_add', {id: produit.id})}}">Ajouter au panier</a>
+			</li>
 			<a href="{{path('produit', {'id':produit.id})}}" class="btn btn-primary">Voir</a>
 			{% if is_granted('ROLE_ADMIN') %}
 				<a href="{{path('produit_delete', {'id':produit.id})}}" class="btn btn-danger">Supprimer</a>

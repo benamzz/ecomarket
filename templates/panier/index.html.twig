@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier
+{% endblock %}
+
+{% block body %}
+	<h1>Votre Panier</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Produit</th>
+				<th>Prix</th>
+				<th>Quantité</th>
+				<th>Total</th>
+				<th>Etat</th>
+			</tr>
+		</thead>
+
+		<tbody>
+
+			{% for element in dataPanier %}
+				<tr>
+					<td>{{element.produit.nom}}</td>
+					<td class="text-end">{{element.produit.prix}}</td>
+					<td>{{element.quantite}}</td>
+					<td class="text-end">{{element.quantite * element.produit.prix}}</td>
+					<td>
+						<a href="{{path("panier_add", {id:element.produit.id})}}" class="btn btn-success">
+							<i class="bi bi-cart-plus">+</i>
+						</a>
+						<a href="{{path("panier_remove", {id:element.produit.id})}}" class="btn btn-warning">
+							<i class="bi bi-cart-dash">-</i>
+						</a>
+						<a href="{{path("panier_delete", {id:element.produit.id})}}" class="btn btn-danger">
+							<i class="bi bi-cart-x">Supprmier</i>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5" class="text-center">Votre Panier est vide</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+
+		<tfoot>
+			<tr>
+				<td colspan="3">Total</td>
+				<td class="text-end">{{total}}</td>
+				<td class="text-end">
+					<a href="{{path("panier_delete_all")}}" class="btn btn-danger">
+						<i class="bi bi-cart-x">Supprmier le panier</i>
+					</a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+{% endblock %}
