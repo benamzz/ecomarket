@@ -9,19 +9,18 @@
 	<table class="table">
 		{% for p in produits %}
 			<div class="card" style="width: 18rem;">
+				<h5 class="card-title text-center">{{p.nom}}</h5>
 				{% if p.photo is not empty %}
-					<img src="{{ asset('uploads/' ~ p.photo)}}" alt="{{p.nom}}">
+					<img src="{{ asset('assets/uploads/' ~ p.photo)}}" class="card-img-top" alt="{{p.nom}}">
 				{% endif %}
-				<div class="card-body">
-					<h5 class="card-title">{{p.nom}}</h5>
-					<p class="card-text">{{p.description}}</p>
-				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Prix :
-						{{p.prix}}</li>
+						{{p.prix}}
+						€
+					</li>
 					<li class="list-group-item">
-						Stock :
-						{{p.stock}}
+						Description :
+						<p class="card-text">{{p.description}}</p>
 					</li>
 					<a href="{{path('produit', {'id':p.id})}}" class="btn btn-primary">Voir</a>
 					{% if is_granted('ROLE_ADMIN') %}
@@ -38,6 +37,9 @@
 	</tbody>
 </table>
 {% if is_granted('ROLE_ADMIN') %}
-	<h2>Ajouter un produit</h2>
-	{{form(ajout)}}{% endif %}
+	<div class="col-3 ">
+		<h2>Ajouter un produit</h2>
+		{{form(ajout)}}{% endif %}
+	</div>
+
 {% endblock %}

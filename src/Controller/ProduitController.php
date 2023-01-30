@@ -24,6 +24,7 @@ class ProduitController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $photo = $form->get('photo')->getData();
+            dd($photo);
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded

@@ -6,7 +6,7 @@
 {% block body %}
 	<h1>Votre Panier</h1>
 
-	<table>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>Produit</th>
@@ -17,14 +17,16 @@
 			</tr>
 		</thead>
 
-		<tbody>
+		<tbody class="table-group-divider">
 
 			{% for element in dataPanier %}
 				<tr>
 					<td>{{element.produit.nom}}</td>
-					<td class="text-end">{{element.produit.prix}}</td>
+					<td>{{element.produit.prix}}
+						€</td>
 					<td>{{element.quantite}}</td>
-					<td class="text-end">{{element.quantite * element.produit.prix}}</td>
+					<td>{{element.quantite * element.produit.prix}}
+						€</td>
 					<td>
 						<a href="{{path("panier_add", {id:element.produit.id})}}" class="btn btn-success">
 							<i class="bi bi-cart-plus">+</i>
@@ -47,8 +49,9 @@
 		<tfoot>
 			<tr>
 				<td colspan="3">Total</td>
-				<td class="text-end">{{total}}</td>
-				<td class="text-end">
+				<td>{{total}}
+					€</td>
+				<td>
 					<a href="{{path("panier_delete_all")}}" class="btn btn-danger">
 						<i class="bi bi-cart-x">Supprmier le panier</i>
 					</a>

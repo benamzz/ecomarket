@@ -1,33 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="card" style="width: 18rem;">
-		{% if produit.photo is not empty %}
-			<img src="{{ asset('uploads/' ~ produit.photo)}}" alt="{{produit.nom}}">
-		{% endif %}
-		<div class="card-body">
-			<h5 class="card-title">{{produit.nom}}</h5>
-			<p class="card-text">{{produit.description}}</p>
-		</div>
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item">Prix :
-				{{produit.prix}}</li>
-			<li class="list-group-item">
-				Stock :
-				{{produit.stock}}
-			</li>
-			<li class="list-group-item">
-				<a href="{{path('panier_add', {id: produit.id})}}">Ajouter au panier</a>
-			</li>
-			<a href="{{path('produit', {'id':produit.id})}}" class="btn btn-primary">Voir</a>
-			{% if is_granted('ROLE_ADMIN') %}
-				<a href="{{path('produit_delete', {'id':produit.id})}}" class="btn btn-danger">Supprimer</a>
+	<div class="col-3 mb-3">
+		<article class="card h-100" style="width: 18rem;">
+			{% if produit.photo is not empty %}
+				<img src="{{ asset('assets/uploads/' ~ produit.photo)}}" alt="{{produit.nom}}">
 			{% endif %}
-		</ul>
+			<div class="card-body">
+				<h5 class="card-title">{{produit.nom}}</h5>
+				<p class="card-text">{{produit.description}}</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">Prix :
+					{{produit.prix}}
+					€</li>
+				<li class="list-group-item">
+					Stock :
+					{{produit.stock}}
+				</li>
+				<li class="list-group-item">
+					<a href="{{path('panier_add', {id: produit.id})}}" class="btn btn-primary">Ajouter au panier</a>
+				</li>
+				{% if is_granted('ROLE_ADMIN') %}
+					<a href="{{path('produit_delete', {'id':produit.id})}}" class="btn btn-danger">Supprimer</a>
+				{% endif %}
+			</ul>
+		</article>
 	</div>
 
+
 	{% if is_granted('ROLE_ADMIN') %}
-		<h2>Modifier
-			{{produit.nom}}</h2>
-		{{form(edit)}}{% endif %}
+		<div class="col-3">
+			<h2>Modifier
+				{{produit.nom}}</h2>
+			{{form(edit)}}{% endif %}
+		</div>
+
 	{% endblock %}
