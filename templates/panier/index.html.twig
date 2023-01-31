@@ -5,7 +5,9 @@
 
 {% block body %}
 	<h1>Votre Panier</h1>
-
+	{% for e in utilisateur %}
+	<h1>{{e.nom}}</h1>
+	{% endfor %}
 	<table class="table">
 		<thead>
 			<tr>
@@ -13,7 +15,7 @@
 				<th>Prix</th>
 				<th>Quantité</th>
 				<th>Total</th>
-				<th>Etat</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 
@@ -22,11 +24,9 @@
 			{% for element in dataPanier %}
 				<tr>
 					<td>{{element.produit.nom}}</td>
-					<td>{{element.produit.prix}}
-						€</td>
+					<td>{{element.produit.prix}}€</td>
 					<td>{{element.quantite}}</td>
-					<td>{{element.quantite * element.produit.prix}}
-						€</td>
+					<td>{{element.quantite * element.produit.prix}}€</td>
 					<td>
 						<a href="{{path("panier_add", {id:element.produit.id})}}" class="btn btn-success">
 							<i class="bi bi-cart-plus">+</i>
@@ -52,9 +52,15 @@
 				<td>{{total}}
 					€</td>
 				<td>
-					<a href="{{path("panier_delete_all")}}" class="btn btn-danger">
-						<i class="bi bi-cart-x">Supprmier le panier</i>
+					<a href="{{path("app_panier")}}" onclick= (){
+
+					}class="btn btn-primary">
+					Valider le paiment
 					</a>
+					<a href="{{path("panier_delete_all")}}" class="btn btn-danger">
+					Supprmier le panier
+					</a>
+					
 				</td>
 			</tr>
 		</tfoot>
